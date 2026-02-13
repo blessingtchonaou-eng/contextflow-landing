@@ -1243,22 +1243,14 @@
     </footer>
 
     <script>
-        // ============================================
-        // CONFIGURATION EMAIL - CHOISIS UNE OPTION
-        // ============================================
         
-        // OPTION 1: KIT/CONVERTKIT (recommandé pour gestion avancée)
-        // Remplace XXXXXXX par ton ID de formulaire Kit
-        // Trouve-le dans Kit > Forms > ton formulaire > Share > HTML
         const KIT_FORM_URL = 'https://app.kit.com/forms/9076151/subscriptions';
         const USE_KIT = true; // Activé ! Kit est configuré
-        
-        // OPTION 2: FORMSUBMIT (super simple, gratuit, pas de compte)
-        // Remplace par TON email où tu veux recevoir les inscriptions
-        const YOUR_EMAIL = 'ton-email@gmail.com'; // ← CHANGE CECI
+     
+        const YOUR_EMAIL = 'ton-email@gmail.com'; //
         const FORMSUBMIT_URL = `https://formsubmit.co/${YOUR_EMAIL}`;
         
-        // ============================================
+       
         
         let waitlistCount = 347; // Starting count
 
@@ -1282,7 +1274,7 @@
                 
                 try {
                     if (USE_KIT) {
-                        // ===== OPTION 1: KIT/CONVERTKIT =====
+                       
                         const formData = new FormData();
                         formData.append('email_address', email);
                         
@@ -1297,7 +1289,7 @@
                         if (!response.ok) throw new Error('Erreur Kit');
                         
                     } else {
-                        // ===== OPTION 2: FORMSUBMIT (Simple) =====
+                       
                         const formData = new FormData();
                         formData.append('email', email);
                         formData.append('message', `Nouvelle inscription waitlist ContextFlow: ${email}`);
@@ -1311,20 +1303,20 @@
                         });
                     }
                     
-                    // Success!
+                   
                     waitlistCount++;
                     document.getElementById('waitlistCount').textContent = waitlistCount;
                     
-                    // Save count to localStorage
+                  
                     localStorage.setItem('contextflowCount', waitlistCount);
                     
-                    // Show success message
+                    
                     document.getElementById('successMessage').classList.add('show');
                     
-                    // Clear form
+                   
                     emailInput.value = '';
                     
-                    // Hide success message after 5 seconds
+                    
                     setTimeout(() => {
                         document.getElementById('successMessage').classList.remove('show');
                     }, 5000);
@@ -1334,42 +1326,41 @@
                     alert('Une erreur est survenue. Réessaie dans quelques instants ou contacte-nous directement.');
                 }
                 
-                // Re-enable button
+               
                 submitBtn.disabled = false;
                 submitBtn.textContent = originalText;
             });
         });
-        
-        // Load saved count from localStorage
+     
         const savedCount = localStorage.getItem('contextflowCount');
         if (savedCount) {
             waitlistCount = parseInt(savedCount);
             document.getElementById('waitlistCount').textContent = waitlistCount;
         }
 
-        // FAQ toggle
+        
         function toggleFaq(element) {
             const faqItem = element.parentElement;
             const wasActive = faqItem.classList.contains('active');
             
-            // Close all
+
             document.querySelectorAll('.faq-item').forEach(item => {
                 item.classList.remove('active');
             });
             
-            // Open clicked one if it wasn't active
+            
             if (!wasActive) {
                 faqItem.classList.add('active');
             }
         }
 
-        // Scroll to form
+        
         function scrollToForm() {
             document.querySelector('.hero .email-form input').focus();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Intersection Observer for fade-in animations
+        
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1385,7 +1376,7 @@
             observer.observe(el);
         });
 
-        // Smooth scroll for navigation
+        
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
